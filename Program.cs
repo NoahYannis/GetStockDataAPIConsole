@@ -22,7 +22,7 @@ class Program
         {
             string json = await response.Content.ReadAsStringAsync();
             Stock stock = JsonConvert.DeserializeObject<Stock>(json);
-            DisplayRequestedParameters(stock);
+            DisplayRequestedParameters(GetRequestedParametersFromUser(stock));
         }
         else
         {
@@ -103,13 +103,11 @@ class Program
 
         return parameters;
     }
-    private static void DisplayRequestedParameters(Stock stock)
+    private static void DisplayRequestedParameters(List<decimal> requestedParams)
     {
-        List<decimal> requestedParamters = GetRequestedParametersFromUser(stock);
-
-        for (int i = 0; i < requestedParamters.Count; i++)
+        for (int i = 0; i < requestedParams.Count; i++)
         {
-            Console.WriteLine(requestedParamters[i].ToString());
+            Console.WriteLine(requestedParams[i].ToString());
         }
 
         Console.ReadLine();
